@@ -25,4 +25,11 @@ public class InMemoryProductRepository implements ProductRepository {
         return product;
     }
 
+    @Override
+    public Optional<Product> findById(Integer productId) {
+        return this.products.stream()
+                .filter(product -> Objects.equals(productId,product.getId()))
+                .findFirst();
+    }
+
 }

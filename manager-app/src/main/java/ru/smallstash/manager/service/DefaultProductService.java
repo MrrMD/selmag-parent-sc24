@@ -25,4 +25,9 @@ public class DefaultProductService implements ProductService {
         return this.productRepository.save(new Product(null, title, details));
     }
 
+    @Override
+    public Optional<Product> findProduct(int productId) {
+        return this.productRepository.findById(productId);
+    }
+
 }

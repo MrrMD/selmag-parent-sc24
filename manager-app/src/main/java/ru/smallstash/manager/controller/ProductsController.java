@@ -1,5 +1,6 @@
 package ru.smallstash.manager.controller;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.smallstash.manager.controller.payload.NewProductPayload;
 import ru.smallstash.manager.entity.Product;
 import ru.smallstash.manager.service.ProductService;
@@ -31,7 +32,13 @@ public class ProductsController {
     @PostMapping("create")
     public String createProduct(NewProductPayload payload) {
         Product product = this.productService.createProduct(payload.title(), payload.details());
-        return "redirect:/catalogue/products/list";
+        return "redirect:/catalogue/products/%d".formatted(product.getId());
+    }
+
+    @GetMapping("{productId:\\d+}")
+    public String getProduct(@PathVariable("productId") int productId, Model model){
+        model.addAttribute("product", this.productService.findProduct(productId).orElseThrow());
+        return "catalogue/products/product";
     }
 }
 
