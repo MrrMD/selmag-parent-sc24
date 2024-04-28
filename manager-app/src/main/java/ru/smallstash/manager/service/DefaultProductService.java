@@ -30,4 +30,14 @@ public class DefaultProductService implements ProductService {
         return this.productRepository.findById(productId);
     }
 
+    @Override
+    public void updateProduct(Integer id, String title, String details) {
+        this.productRepository.findById(id)
+                .ifPresentOrElse(product -> {
+                    product.setTitle(title);
+                    product.setDetails(details);
+                }, () -> {
+                    throw new NoSuchElementException();
+                });
+    }
 }
