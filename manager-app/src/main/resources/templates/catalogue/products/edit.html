@@ -13,16 +13,16 @@
         <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
     </ul>
 </div>
-<form method="post" data-th-action="@{/catalogue/products/{productId}(product.id=${product.id})}">
+<form method="post" data-th-action="@{/catalogue/products/{productId}/edit(productId=${product.id})}">
     <label>
         Название:<br>
-        <input type="text" name="title" data-th-value="${payload?.title}">
+        <input type="text" name="title" data-th-value="${product.title}">
     </label><br>
     <label>
         Описание:<br>
-        <textarea name="details" data-th-text="${payload?.details}"></textarea>
+        <textarea name="details" data-th-text="${product.details}"></textarea>
     </label><br>
-    <button type="submit">Создать</button>
+    <button type="submit">Изменить</button>
 </form>
 </body>
 </html>

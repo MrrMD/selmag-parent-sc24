@@ -1,14 +1,16 @@
 package ru.smallstash.manager.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.smallstash.manager.controller.payload.UpdateProductPayload;
 import ru.smallstash.manager.entity.Product;
 import ru.smallstash.manager.service.ProductService;
 
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("{productId:\\d+}")
+@RequestMapping("catalogue/products/{productId:\\d+}")
 public class ProductController {
 
     private final ProductService productService;
@@ -31,6 +33,6 @@ public class ProductController {
     @PostMapping("edit")
     public String updateProduct(@ModelAttribute("product") Product product, UpdateProductPayload payload){
         this.productService.updateProduct(product.getId(), product.getTitle(), product.getDetails());
-        return "redirect:/catalogue/products/%d". formatted(product.getId());
+        return "redirect:/catalogue/products/%d".formatted(product.getId());
     }
 }
